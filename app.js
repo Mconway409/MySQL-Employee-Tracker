@@ -186,17 +186,18 @@ function addRole() {
         message: "enter department ID:",
       },
     ])
-    .then(function (response) {
+    .then(function (res) {
       connection.query(
-        "INSERT INTO roles (id, title, salary, department_id) values (?, ?, ?, ?)",
+        "INSERT INTO role (id, title, salary, department_id) values (?, ?, ?, ?)",
         [res.id, res.title, res.salary, res.department_id],
         function (err, data) {
-          console.table(data);
-        }
-      );
-      askQuestions();
-    });
-}
+            if (err) throw err;
+            console.table("Successfully Inserted");
+            askQuestions();
+          }
+        );
+      });
+  }
 function updateEmployeeRole() {
   inquirer
     .prompt([
@@ -216,9 +217,10 @@ function updateEmployeeRole() {
         "UPDATE employee SET role_id = ? WHERE first_name = ?",
         [res.role_id, res.name],
         function (err, data) {
-          console.table(data);
-        }
-      );
-      askQuestions();
-    });
-}
+            if (err) throw err;
+            console.table("Successfully Inserted");
+            askQuestions();
+          }
+        );
+      });
+  }
